@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- modal -->
+    <dialog class="modal">
+        <form action="post" class="modal-form" method="dialog">
+            <div class="form-row">
+                <label for="title">Book Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="form-row">
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author">
+            </div>
+            <div class="form-row">
+                <label for="pages">Number of Pages</label>
+                <input min=1 max=30000 type="number" name="pages" id="pages">
+            </div>
+            <div class="form-row">
+                <label for="pages-read">Pages Read</label>
+                <input max=30000 type="number" name="pages-read" id="pages-read">
+            </div>
+            <div>
+                <input name="isRead" id="isRead" type="checkbox">
+                <label for="isRead">Finished Reading</label>
+            </div>
+            <div class="submit-section">
+                <button type="submit">Submit Book</button>
+            </div>
+        </form>
+    </dialog>
+    <!-- header -->
+    <header class="header">
+        <p>Library</p>
+    </header>
+    <!-- main -->
+    <main class="main-container">
+        <div class="add-book"><button class="add-book">+ Add Book</button></div>
+
+    </main>
+    <!-- footer -->
+    <footer class="footer">
+        <p>Jaime Blanco</p>
+    </footer>
+</body>
+
+</html>

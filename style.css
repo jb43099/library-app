@@ -1,0 +1,138 @@
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+body {
+  background-color: var(--backgroundColor);
+  color: var(--fontColor);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 2fr 9fr 1fr;
+}
+
+.header {
+  background-color: #000;
+  grid-column: 1 / -1;
+  font-size: 2rem;
+  padding: 0 32px;
+}
+
+.main-container {
+  padding: 24px;
+  display: grid;
+  grid-template-rows: 1fr 4fr 4fr;
+  grid-template-columns: 1fr;
+  grid-column: 1 / -1;
+}
+
+.add-book {
+  grid-row: 1;
+  grid-column: 1;
+  display: grid;
+  place-items: center;
+}
+
+button.add-book {
+  background-color: var(--backgroundColor);
+  color: var(--fontColor);
+  border: none;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button.add-book:hover {
+  background-color: #444;
+}
+
+button.add-book:active {
+  background-color: #666;
+}
+
+.footer {
+  grid-row: -2 / -1;
+  grid-column: 1 / -1;
+  display: grid;
+  place-items: center;
+}
+/* modal-form */
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  width: 50vw;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.form-row input {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  height: 2rem;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
+/* submit button */
+
+.submit-section button {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+  color: #fff;
+  background-color: #000;
+}
+
+.submit-section button:hover {
+  background-color: #333;
+}
+.submit-section button:active {
+  background-color: #999;
+}
+
+/* dark mode light mode color media queries */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --backgroundColor: #333;
+    --fontColor: #fff;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    --backgroundColor: #ddd;
+    --fontColor: #000;
+  }
+}
