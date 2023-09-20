@@ -2,9 +2,12 @@
 const myLibrary = []
 const addBookButton = document.querySelector('button.add-book')
 const modal = document.querySelector('.modal')
-const isReadButton = document.querySelector('#isRead')
+const isReadCheckbox = document.querySelector('#isRead')
 const pagesReadInput = document.querySelector('#pages-read')
 const pagesReadLabel = document.querySelector('label[for=pages-read]')
+const numberOfPagesInput = document.querySelector('#pages')
+const submitButton = document.querySelector('.submit-section button')
+const pagesWarning = document.createElement('div')
 
 // classes , constructors
 function Book(title, author, pages, isRead) {
@@ -19,22 +22,46 @@ Book.prototype.addBookToLibrary = function () {
     myLibrary.push(this);
 }
 
-function showAddBookModal() {
-
+function createPagesWarning() {
+    if (+pagesReadInput.value > +numberOfPagesInput.value) {
+        pagesWarning.innerText = 'Pages Read cannot be greater than Number of Pages'
+        pagesReadInput.insertAdjacentElement('afterend', pagesWarning)
+        pagesWarning.style.textAlign = 'center'
+        pagesWarning.style.color = 'red'
+    } else if (pagesReadInput.value <= numberOfPagesInput.value) {
+        pagesWarning.remove()
+    }
 }
+
 
 // event listeners , function calls
 addBookButton.addEventListener('click', () => {
     modal.showModal()
 })
 
-isReadButton.addEventListener('click', () => {
-    if (isReadButton.checked) {
-        pagesReadInput.style.display = 'none'
-        pagesReadLabel.style.display = 'none'
+isReadCheckbox.addEventListener('click', () => {
+    if (isReadCheckbox.checked) {
+        pagesReadInput.value = numberOfPagesInput.value
+        pagesWarning.remove()
     } else {
-        pagesReadInput.style.display = 'block'
-        pagesReadLabel.style.display = 'block'
+        pagesReadInput.value = ''
     }
 })
 
+pagesReadInput.addEventListener('change', () => {
+    if (pagesReadInput.value == numberOfPagesInput.value) {
+        isReadCheckbox.checked = true
+    } else {
+        isReadCheckbox.checked = false
+    }
+})
+
+pagesReadInput.addEventListener('change', () => {
+    createPagesWarning()
+})
+
+submitButton.addEventListener('click', (e) => {
+    if (pagesReadInput.value > numberOfPagesInput.value) {
+        e.preventDefault()
+    }
+})

@@ -16,19 +16,20 @@
         <form action="post" class="modal-form" method="dialog">
             <div class="form-row">
                 <label for="title">Book Title</label>
-                <input type="text" name="title" id="title">
+                <input required type="text" name="title" id="title">
             </div>
             <div class="form-row">
                 <label for="author">Author</label>
-                <input type="text" name="author" id="author">
+                <input required type="text" name="author" id="author">
             </div>
             <div class="form-row">
                 <label for="pages">Number of Pages</label>
-                <input min=1 max=30000 type="number" name="pages" id="pages">
+                <input required min=1 max=30000 type="number" name="pages" id="pages">
             </div>
             <div class="form-row">
                 <label for="pages-read">Pages Read</label>
                 <input max=30000 type="number" name="pages-read" id="pages-read">
+                <div></div>
             </div>
             <div>
                 <input name="isRead" id="isRead" type="checkbox">

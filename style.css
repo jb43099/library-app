@@ -72,6 +72,7 @@ button.add-book:active {
   max-width: 500px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #ddd;
 }
 
 .modal-form {
@@ -93,7 +94,8 @@ label {
 }
 
 .form-row input {
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
+  background-color: #eee;
   border-radius: 5px;
   height: 2rem;
   padding: 5px 10px;
