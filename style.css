@@ -5,6 +5,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   list-style: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
@@ -25,7 +26,7 @@ body {
 .main-container {
   padding: 24px;
   display: grid;
-  grid-template-rows: 1fr 4fr 4fr;
+  grid-template-rows: 1fr 6fr 6fr;
   grid-template-columns: 1fr;
   grid-column: 1 / -1;
 }
@@ -33,8 +34,7 @@ body {
 .add-book {
   grid-row: 1;
   grid-column: 1;
-  display: grid;
-  place-items: center;
+  text-align: center;
 }
 
 button.add-book {
@@ -87,6 +87,37 @@ button.add-book:active {
   font-size: 1.25rem;
 }
 
+.card-row {
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-row.is-read {
+  background-color: #000;
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card-row.is-read.read {
+  background-color: #9fff9c;
+}
+
+.card-row.is-read.not-read {
+  background-color: #ff9c9c;
+}
+
+button.is-read {
+  font-size: 1.25rem;
+  width: 100%;
+  border: none;
+  display: grid;
+  place-items: center;
+}
+
 /* modal-form */
 .modal::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
@@ -98,6 +129,7 @@ button.add-book:active {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: #ddd;
+  border: none;
 }
 
 .modal-form {
@@ -111,6 +143,7 @@ button.add-book:active {
 .form-row {
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
 
 label {
