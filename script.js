@@ -2,45 +2,44 @@
 const myLibrary = []
 const addBookButton = document.querySelector('button.add-book')
 const modal = document.querySelector('.modal')
-const pagesReadLabel = document.querySelector('label[for=pages-read]')
+// const pagesReadLabel = document.querySelector('label[for=pages-read]')
 const titleInput = document.querySelector('#title')
 const authorInput = document.querySelector('#author')
 const numberOfPagesInput = document.querySelector('#pages')
-const pagesReadInput = document.querySelector('#pages-read')
+// const pagesReadInput = document.querySelector('#pages-read')
 const isReadCheckbox = document.querySelector('#isRead')
 const submitButton = document.querySelector('.submit-section button')
 const pagesWarning = document.createElement('div')
-const card = document.querySelector('.card')
-const cardRows = document.querySelectorAll('card-row')
+// const card = document.querySelector('.card')
+// const cardRows = document.querySelectorAll('card-row')
 const cardContainer = document.querySelector('.book-cards')
 
 // classes , constructors
-function Book(title, author, pages, pagesRead, isRead) {
+function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.pagesRead = pagesRead;
     this.isRead = isRead;
 }
 
 
 // functions , methods
 function addBookToLibrary() {
-    const book = new Book(titleInput.value, authorInput.value, numberOfPagesInput.value, pagesReadInput.value, isReadCheckbox.checked)
+    const book = new Book(titleInput.value, authorInput.value, numberOfPagesInput.value, isReadCheckbox.checked)
     myLibrary.push(book)
     return book
 }
 
-function createPagesWarning() {
-    if (+pagesReadInput.value > +numberOfPagesInput.value) {
-        pagesWarning.innerText = 'Pages Read cannot be greater than Number of Pages'
-        pagesReadInput.insertAdjacentElement('afterend', pagesWarning)
-        pagesWarning.style.textAlign = 'center'
-        pagesWarning.style.color = 'red'
-    } else if (+pagesReadInput.value <= +numberOfPagesInput.value) {
-        pagesWarning.remove()
-    }
-}
+// function createPagesWarning() {
+//     if (+pagesReadInput.value > +numberOfPagesInput.value) {
+//         pagesWarning.innerText = 'Pages Read cannot be greater than Number of Pages'
+//         pagesReadInput.insertAdjacentElement('afterend', pagesWarning)
+//         pagesWarning.style.textAlign = 'center'
+//         pagesWarning.style.color = 'red'
+//     } else if (+pagesReadInput.value <= +numberOfPagesInput.value) {
+//         pagesWarning.remove()
+//     }
+// }
 
 function createBookCard(book) {
     // create card
@@ -92,33 +91,29 @@ addBookButton.addEventListener('click', () => {
     modal.showModal()
 })
 
-isReadCheckbox.addEventListener('click', () => {
-    if (isReadCheckbox.checked) {
-        pagesReadInput.value = numberOfPagesInput.value
-        pagesWarning.remove()
-    } else {
-        pagesReadInput.value = ''
-    }
-})
+// isReadCheckbox.addEventListener('click', () => {
+//     if (isReadCheckbox.checked) {
+//         pagesReadInput.value = numberOfPagesInput.value
+//         pagesWarning.remove()
+//     } else {
+//         pagesReadInput.value = ''
+//     }
+// })
 
-pagesReadInput.addEventListener('change', () => {
-    if (pagesReadInput.value == numberOfPagesInput.value) {
-        isReadCheckbox.checked = true
-    } else {
-        isReadCheckbox.checked = false
-    }
-})
+// pagesReadInput.addEventListener('change', () => {
+//     if (pagesReadInput.value == numberOfPagesInput.value) {
+//         isReadCheckbox.checked = true
+//     } else {
+//         isReadCheckbox.checked = false
+//     }
+// })
 
-pagesReadInput.addEventListener('change', () => {
-    createPagesWarning()
-})
+// pagesReadInput.addEventListener('change', () => {
+//     createPagesWarning()
+// })
 
 submitButton.addEventListener('click', (e) => {
-    if (+pagesReadInput.value > +numberOfPagesInput.value) {
-        e.preventDefault()
-    } else if (+pagesReadInput.value <= +numberOfPagesInput.value) {
-        createBookCard(addBookToLibrary())
-    }
+    createBookCard(addBookToLibrary())
 })
 
 document.addEventListener('click', e => {
@@ -128,7 +123,6 @@ document.addEventListener('click', e => {
         const authorCard = pagesCard.previousElementSibling
         const titleCard = authorCard.previousElementSibling
         const book = myLibrary.find(book => book.title === titleCard.innerText)
-        console.log(book)
         if (isRead.innerText == 'Finished') {
             isRead.innerText = 'Not Finished';
             isRead.style.backgroundColor = '#ff9c9c';
