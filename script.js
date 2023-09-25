@@ -10,8 +10,6 @@ const numberOfPagesInput = document.querySelector('#pages')
 const isReadCheckbox = document.querySelector('#isRead')
 const submitButton = document.querySelector('.submit-section button')
 const pagesWarning = document.createElement('div')
-// const card = document.querySelector('.card')
-// const cardRows = document.querySelectorAll('card-row')
 const cardContainer = document.querySelector('.book-cards')
 
 // classes , constructors
@@ -69,27 +67,63 @@ function createBookCard(book) {
     // if (book.pagesRead == '') row4.innerText = '0 pages read'
     // card.appendChild(row4)
     // isRead
+    const row4 = document.createElement('button')
+    row4.classList.add('card-row')
+    row4.classList.add('is-read')
+    if (book.isRead == true) {
+        row4.classList.add('read')
+        row4.innerText = 'Finished'
+    } else {
+        row4.classList.add('not-read')
+        row4.innerText = 'Not Finished'
+    }
+    card.appendChild(row4)
     const row5 = document.createElement('button')
     row5.classList.add('card-row')
-    row5.classList.add('is-read')
-    if (book.isRead == true) {
-        row5.classList.add('read')
-        row5.innerText = 'Finished'
-    } else if (book.isRead == false && book.pagesRead > 0) {
-        row5.classList.add('not-read')
-        row5.innerText = 'Not Finished'
-    } else {
-        row5.classList.add('not-read')
-        row5.innerText = 'Not Finished'
-    }
+    row5.classList.add('remove-button')
+    row5.innerText = `Remove`
     card.appendChild(row5)
 
 }
 
+function removeCard(e) {
+    if (e.target.matches('button.remove-button')) {
+        const removeButton = e.target
+        const card = removeButton.parentElement
+        const titleCard = removeButton.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling
+        const bookIndex = myLibrary.findIndex(book => book.title == titleCard.value)
+        myLibrary.splice(bookIndex, 1)
+        card.remove()
+    }
+}
+
+function toggleIsRead(e) {
+    if (e.target.matches('button.is-read')) {
+        const isRead = e.target
+        const pagesCard = isRead.previousElementSibling
+        const authorCard = pagesCard.previousElementSibling
+        const titleCard = authorCard.previousElementSibling
+        const book = myLibrary.find(book => book.title === titleCard.innerText)
+        if (isRead.innerText == 'Finished') {
+            isRead.innerText = 'Not Finished';
+            isRead.style.backgroundColor = '#ff9c9c';
+            book.isRead = false
+        } else {
+            isRead.innerText = 'Finished';
+            isRead.style.backgroundColor = '#9fff9c';
+            book.isRead = true
+        }
+    }
+}
+
 // event listeners , function calls
-addBookButton.addEventListener('click', () => {
-    modal.showModal()
-})
+addBookButton.addEventListener('click', () => modal.showModal())
+
+submitButton.addEventListener('click', (e) => createBookCard(addBookToLibrary()))
+
+document.addEventListener('click', (e) => toggleIsRead(e))
+
+document.addEventListener('click', (e) => removeCard(e))
 
 // isReadCheckbox.addEventListener('click', () => {
 //     if (isReadCheckbox.checked) {
@@ -111,26 +145,3 @@ addBookButton.addEventListener('click', () => {
 // pagesReadInput.addEventListener('change', () => {
 //     createPagesWarning()
 // })
-
-submitButton.addEventListener('click', (e) => {
-    createBookCard(addBookToLibrary())
-})
-
-document.addEventListener('click', e => {
-    if (e.target.matches('button.is-read')) {
-        const isRead = e.target
-        const pagesCard = isRead.previousElementSibling
-        const authorCard = pagesCard.previousElementSibling
-        const titleCard = authorCard.previousElementSibling
-        const book = myLibrary.find(book => book.title === titleCard.innerText)
-        if (isRead.innerText == 'Finished') {
-            isRead.innerText = 'Not Finished';
-            isRead.style.backgroundColor = '#ff9c9c';
-            book.isRead = false
-        } else {
-            isRead.innerText = 'Finished';
-            isRead.style.backgroundColor = '#9fff9c';
-            book.isRead = true
-        }
-    }
-})
