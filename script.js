@@ -103,7 +103,8 @@ function removeCard(e) {
         const removeButton = e.target
         const card = removeButton.parentElement
         const titleCard = removeButton.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling
-        const bookIndex = myLibrary.findIndex(book => book.title == titleCard.value)
+        const book = myLibrary.find(book => book.title === titleCard.innerText)
+        const bookIndex = myLibrary.findIndex(book => book.title == titleCard.innerText)
         myLibrary.splice(bookIndex, 1)
         localStorage.setItem('array', JSON.stringify(myLibrary))
         card.remove()
