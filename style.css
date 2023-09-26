@@ -8,6 +8,16 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+:root {
+  --backgroundColor: #6c757d;
+  --fontColor: #f8f9fa;
+  --headerColor: #343a40;
+  --cardBackground: #ced4da;
+  --cardFontColor: #212529;
+  --buttonColor: #f8f9fa;
+  --buttonFontColor: #212529;
+}
+
 body {
   background-color: var(--backgroundColor);
   color: var(--fontColor);
@@ -17,7 +27,7 @@ body {
 }
 
 .header {
-  background-color: #000;
+  background-color: var(--headerColor);
   grid-column: 1 / -1;
   font-size: 2rem;
   padding: 0 32px;
@@ -49,11 +59,7 @@ button.add-book {
 }
 
 button.add-book:hover {
-  background-color: #444;
-}
-
-button.add-book:active {
-  background-color: #666;
+  background-color: var(--headerColor);
 }
 
 .footer {
@@ -75,7 +81,7 @@ button.add-book:active {
   display: flex;
   gap: 12px;
   flex-direction: column;
-  background-color: #ddd;
+  background-color: var(--cardBackground);
   border-radius: 5px;
   padding: 10px;
   width: 100%;
@@ -83,7 +89,7 @@ button.add-book:active {
   justify-content: center;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 4px;
-  color: #000;
+  color: var(--cardFontColor);
   font-size: 1.25rem;
   border: none;
 }
@@ -103,6 +109,10 @@ button.is-read.not-read {
   background-color: #ff9c9c;
 }
 
+button.remove-button {
+  background-color: var(--buttonColor);
+}
+
 button.card-row {
   font-size: 1.25rem;
   width: 100%;
@@ -111,12 +121,7 @@ button.card-row {
   place-items: center;
   border-radius: 5px;
   cursor: pointer;
-}
-
-button.is-read {
-}
-
-button.remove-button {
+  color: var(--buttonFontColor);
 }
 
 /* modal-form */
@@ -129,7 +134,8 @@ button.remove-button {
   max-width: 500px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background-color: #ddd;
+  background-color: var(--cardBackground);
+  color: var(--cardFontColor);
   border: none;
 }
 
@@ -180,18 +186,24 @@ label {
   background-color: #999;
 }
 
-/* dark mode light mode color media queries */
-
-@media (prefers-color-scheme: dark) {
-  body {
-    --backgroundColor: #333;
-    --fontColor: #fff;
+/* phone query */
+@media screen and (max-width: 480px) {
+  .book-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
   }
-}
 
-@media (prefers-color-scheme: light) {
-  body {
-    --backgroundColor: #ddd;
-    --fontColor: #000;
+  .header {
+    display: flex;
+    justify-content: center;
+  }
+
+  .main-container {
+    height: auto;
+  }
+
+  .modal {
+    width: 75vw;
   }
 }
