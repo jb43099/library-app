@@ -1,5 +1,6 @@
 // variables
-const myLibrary = []
+const storedMyLibrary = localStorage.getItem('array')
+const myLibrary = storedMyLibrary ? JSON.parse(storedMyLibrary) : [];
 const addBookButton = document.querySelector('button.add-book')
 const modal = document.querySelector('.modal')
 // const pagesReadLabel = document.querySelector('label[for=pages-read]')
@@ -12,6 +13,7 @@ const submitButton = document.querySelector('.submit-section button')
 const pagesWarning = document.createElement('div')
 const cardContainer = document.querySelector('.book-cards')
 
+
 // classes , constructors
 function Book(title, author, pages, isRead) {
     this.title = title;
@@ -20,12 +22,21 @@ function Book(title, author, pages, isRead) {
     this.isRead = isRead;
 }
 
-
 // functions , methods
 function addBookToLibrary() {
-    const book = new Book(titleInput.value, authorInput.value, numberOfPagesInput.value, isReadCheckbox.checked)
-    myLibrary.push(book)
-    return book
+    if (!titleInput.value ||
+        !authorInput.value ||
+        !numberOfPagesInput.value ||
+        isNaN(+numberOfPagesInput.value) ||
+        +numberOfPagesInput.value <= 0 ||
+        +numberOfPagesInput.value > 30000) {
+        return
+    } else {
+        const book = new Book(titleInput.value, authorInput.value, numberOfPagesInput.value, isReadCheckbox.checked)
+        myLibrary.push(book)
+        localStorage.setItem('array', JSON.stringify(myLibrary))
+        return book
+    }
 }
 
 // function createPagesWarning() {
@@ -40,6 +51,7 @@ function addBookToLibrary() {
 // }
 
 function createBookCard(book) {
+    if (!book) return
     // create card
     const card = document.createElement('div')
     card.classList.add('card')
@@ -93,6 +105,7 @@ function removeCard(e) {
         const titleCard = removeButton.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling
         const bookIndex = myLibrary.findIndex(book => book.title == titleCard.value)
         myLibrary.splice(bookIndex, 1)
+        localStorage.setItem('array', JSON.stringify(myLibrary))
         card.remove()
     }
 }
@@ -108,12 +121,20 @@ function toggleIsRead(e) {
             isRead.innerText = 'Not Finished';
             isRead.style.backgroundColor = '#ff9c9c';
             book.isRead = false
+            localStorage.setItem('array', JSON.stringify(myLibrary))
         } else {
             isRead.innerText = 'Finished';
             isRead.style.backgroundColor = '#9fff9c';
             book.isRead = true
+            localStorage.setItem('array', JSON.stringify(myLibrary))
         }
     }
+}
+
+function populateCardsOnPageLoad() {
+    myLibrary.forEach(book => {
+        createBookCard(book)
+    })
 }
 
 // event listeners , function calls
@@ -124,6 +145,8 @@ submitButton.addEventListener('click', (e) => createBookCard(addBookToLibrary())
 document.addEventListener('click', (e) => toggleIsRead(e))
 
 document.addEventListener('click', (e) => removeCard(e))
+
+populateCardsOnPageLoad()
 
 // isReadCheckbox.addEventListener('click', () => {
 //     if (isReadCheckbox.checked) {
