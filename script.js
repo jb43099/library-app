@@ -12,6 +12,7 @@ const isReadCheckbox = document.querySelector('#isRead')
 const submitButton = document.querySelector('.submit-section button')
 const pagesWarning = document.createElement('div')
 const cardContainer = document.querySelector('.book-cards')
+const inputs = document.querySelectorAll('input')
 
 
 // classes , constructors
@@ -141,13 +142,30 @@ function populateCardsOnPageLoad() {
 // event listeners , function calls
 addBookButton.addEventListener('click', () => modal.showModal())
 
+inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        document.body.style.position = 'fixed'
+        document.body.style.width = '100%'
+        document.body.style.height = '100%'
+    })
+})
+
+modal.addEventListener('close', () => {
+    document.body.style.position = 'static'
+})
+
 submitButton.addEventListener('click', (e) => createBookCard(addBookToLibrary()))
 
 document.addEventListener('click', (e) => toggleIsRead(e))
 
 document.addEventListener('click', (e) => removeCard(e))
 
+document.addEventListener('dblclick', (e) => {
+    e.preventDefault
+})
+
 populateCardsOnPageLoad()
+
 
 // isReadCheckbox.addEventListener('click', () => {
 //     if (isReadCheckbox.checked) {

@@ -191,7 +191,7 @@ label {
   .book-cards {
     display: grid;
     grid-template-columns: 1fr;
-    place-items: center;
+    width: 75vw;
   }
 
   .header {
@@ -201,9 +201,12 @@ label {
 
   .main-container {
     height: auto;
+    justify-items: center;
   }
 
   .modal {
     width: 75vw;
+    position: fixed;
+    overflow: hidden;
   }
 }
